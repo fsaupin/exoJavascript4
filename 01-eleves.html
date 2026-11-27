@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Exo d'Algo(Part 4) - #01 - Les élèves</title>
     <link href="./css/style.css" rel="stylesheet" />
-    <script type="text/javascript" src="./js/eleve.js"></script>
+    <script type="text/javascript" src="./js/eleves.js"></script>
 </head>
 <body>
 <div class="card">
@@ -70,6 +70,29 @@
 <script type="text/javascript">
 
     let groupeEleves = [];
+
+    /*création des objets pierreDupont, marieFontaine, johnHunter */
+    let pierreDupont = new Eleve("Dupont", "Pierre", "Kercode");
+    let marieFontaine = new Eleve("Fontaine", "Marie", "CDA");
+    let johnHunter = new Eleve("Hunter", "John", "BTS SIO");
+
+    /*on pousse avec la methode push dans le tableau groupeEleves*/
+    groupeEleves.push(pierreDupont, marieFontaine, johnHunter);
+    console.log(groupeEleves[0].nom);
+    console.log(groupeEleves[1].classe);
+
+    /* autres solutions : groupeEleves.push(new Eleve("Dupont", "Pierre", "Kercode"))*/
+
+    /*on déclare les notes (let), ensuite on pousse en indquant le chemin et .push, on affiche avec console.log*/
+    let noteMarieMath = 12;
+    let noteJohnAlgo = 18;
+    marieFontaine.notes.maths.push(noteMarieMath);
+    johnHunter.notes.algorithmique.push(noteJohnAlgo);
+    console.log(groupeEleves[1].notes.maths);
+    console.log(groupeEleves[2].notes.algorithmique);
+    console.log(groupeEleves);
+
+    
     
     // -----------------------------------------------------
     /*
@@ -78,12 +101,39 @@
      *  
      * Retour : --- retour de la fonction ICI ---
      */
-
-    function genererNote () { 
+    /* fonction pour générer une note entre 0 (inclus) et 20 (inclus) */
+    function genererNote (min, max) { 
         // CODE HERE
+        const noteMinimum = Math.ceil(min);
+        const noteMaximum = Math.floor(max);
+        return Math.floor(
+            Math.random() * (noteMaximum - noteMinimum + 1) + noteMinimum)
+         }
+    /* plus simple utiliser math.random * 20 
+    function genererNote () {
+    return (Math.random() * 20) 
+        }
+    
+    */
 
+    /*For each ne pas oublier de déclarer la variable, ici (eleve), et ensuite l'utiliser dans la commande (eleve.note.etc),
+    et utilisation d'accolade si il y plus qu'une seule commande */
+
+    groupeEleves.forEach((eleve) => (eleve.notes.algorithmique.push(genererNote(0, 20))));
+
+    console.log(groupeEleves[1].notes.algorithmique)
+
+
+
+    /* groupeEleves.forEach((eleve) => {
+        eleve.notes.algorithmique.forEach()
+    } */
+    let somme = 0
+    for (let i=0; i<johnHunter.notes.algorithmique.length; i++){
+        somme += johnHunter.notes.algorithmique[i];
     }
 
+    console.log(somme/johnHunter.notes.algorithmique.lenght)
 
     // -----------------------------------------------------
 
